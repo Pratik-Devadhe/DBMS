@@ -1,0 +1,314 @@
+pratik-devadhe@pratik-devadhe-HP-Laptop-15-fc0xxx:~$ sudo mysql -u root -p
+[sudo] password for pratik-devadhe: 
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.40-0ubuntu0.24.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| ass1               |
+| ass2               |
+| information_schema |
+| mysql              |
+| performance_schema |
+| pratik             |
+| sys                |
++--------------------+
+7 rows in set (0.01 sec)
+
+mysql> create database ass3;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use ass3;
+Database changed
+mysql> create table employee;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql> create table employee emp_no int ,emp_name varchar(20) , date date , position varchar(20) , salary float;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'emp_no int ,emp_name varchar(20) , date date , position varchar(20) , salary flo' at line 1
+mysql> create table employee (emp_no int ,emp_name varchar(20) , date date , position varchar(20) , salary float);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into employee values (('01', 'pratik' ,'01-01-2025','hr' , '22154.32') , ('02' , 'vedant' , '02-02-2025' , 'hr' , '32652.30') , ('03' , 'yash' , '23-10-2023', 'manager' , '123654.02'));
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into employee values(('01', 'pratik' ,'01-01-2025','hr' , '22154.32') , ('02' , 'vedant' , '02-02-2025' , 'hr' , '32652.30') , ('03' , 'yash' , '23-10-2023', 'manager' ,
+'123654.02'));
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into employee values(('01', 'pratik' ,'01-01-2025','hr');
+[1]+  Stopped                 sudo mysql -u root -p
+pratik-devadhe@pratik-devadhe-HP-Laptop-15-fc0xxx:~$ sudo mysql -u root -p
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+pratik-devadhe@pratik-devadhe-HP-Laptop-15-fc0xxx:~$ sudo mysql -u root -p
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+pratik-devadhe@pratik-devadhe-HP-Laptop-15-fc0xxx:~$ sudo mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.40-0ubuntu0.24.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use ass3;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> insert into employee values (('01', 'pratik' ,'01-01-2025','hr' , '22154.32');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> insert into employee values ('01', 'pratik' ,'01-01-2025','hr' , '22154.32');
+ERROR 1292 (22007): Incorrect date value: '01-01-2025' for column 'date' at row 1
+mysql> insert into employee values ('01', 'pratik' ,'01/01/2025','hr' , '22154.32');
+ERROR 1292 (22007): Incorrect date value: '01/01/2025' for column 'date' at row 1
+mysql> insert into employee values ('01', 'pratik' ,'2025/02/01','hr' , '22154.32');
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+mysql> insert into employee values ('02' , 'vedant' , '2025/02/02' , 'hr' , '32652.30');
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+mysql> insert into employee values('03' , 'yash' , '10/23/2023', 'manager' , '123654.02');
+ERROR 1292 (22007): Incorrect date value: '10/23/2023' for column 'date' at row 1
+mysql> insert into employee values('03' , 'yash' , '23/10/2023', 'manager' , '123654.02');
+ERROR 1292 (22007): Incorrect date value: '23/10/2023' for column 'date' at row 1
+mysql> insert into employee values('03' , 'yash' , '10/23/2023', 'manager' , '123654.02');
+ERROR 1292 (22007): Incorrect date value: '10/23/2023' for column 'date' at row 1
+mysql> insert into employee values('03' , 'yash' , '2023/23/10', 'manager' , '123654.02');
+ERROR 1292 (22007): Incorrect date value: '2023/23/10' for column 'date' at row 1
+mysql> insert into employee values('03' , 'yash' , '2023/10/23', 'manager' , '123654.02');
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+mysql> insert into employee values('04' , 'mayur' , '2023/03/3', 'manager' , '13244.02');
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+mysql> insert into employee values('05' , 'krushna' , '2023/03/13', 'manager' , '35244.02');
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+mysql> select * from employee;
++--------+----------+------------+----------+---------+
+| emp_no | emp_name | date       | position | salary  |
++--------+----------+------------+----------+---------+
+|      1 | pratik   | 2025-02-01 | hr       | 22154.3 |
+|      2 | vedant   | 2025-02-02 | hr       | 32652.3 |
+|      3 | yash     | 2023-10-23 | manager  |  123654 |
+|      4 | mayur    | 2023-03-03 | manager  |   13244 |
+|      5 | krushna  | 2023-03-13 | manager  |   35244 |
++--------+----------+------------+----------+---------+
+5 rows in set (0.00 sec)
+
+mysql> create table TC (emp_no int ,emp_name varchar(20) , date date , position varchar(20) , salary float);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into TC values('05' , 'krushna' , '2023/03/13', 'manager' , '35244.02');
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+mysql> insert into TC values('01' , 'pratik' , '2025/02/01', 'hr' , '22154.3');
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+mysql> insert into TC values('04' , 'mayur' , '2023/03/03', 'manager' , '13244');
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+mysql> insert into TC values('02' , 'vedant' , '2025/06/5', 'manager' , '32544');
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+mysql> insert into TC values('04' , 'yash' , '2025/06/5', 'manager' , '31545');
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+mysql> select * from Tc;
+ERROR 1146 (42S02): Table 'ass3.Tc' doesn't exist
+mysql> select * from TC;
++--------+----------+------------+----------+---------+
+| emp_no | emp_name | date       | position | salary  |
++--------+----------+------------+----------+---------+
+|      5 | krushna  | 2023-03-13 | manager  |   35244 |
+|      1 | pratik   | 2025-02-01 | hr       | 22154.3 |
+|      4 | mayur    | 2023-03-03 | manager  |   13244 |
+|      2 | vedant   | 2025-06-05 | manager  |   32544 |
+|      4 | yash     | 2025-06-05 | manager  |   31545 |
++--------+----------+------------+----------+---------+
+5 rows in set (0.00 sec)
+
+mysql> update TC set emp_no='03' where emp_name='yash';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from TC;
++--------+----------+------------+----------+---------+
+| emp_no | emp_name | date       | position | salary  |
++--------+----------+------------+----------+---------+
+|      5 | krushna  | 2023-03-13 | manager  |   35244 |
+|      1 | pratik   | 2025-02-01 | hr       | 22154.3 |
+|      4 | mayur    | 2023-03-03 | manager  |   13244 |
+|      2 | vedant   | 2025-06-05 | manager  |   32544 |
+|      3 | yash     | 2025-06-05 | manager  |   31545 |
++--------+----------+------------+----------+---------+
+5 rows in set (0.00 sec)
+
+mysql> alter table TC rename to TE;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from TE;
++--------+----------+------------+----------+---------+
+| emp_no | emp_name | date       | position | salary  |
++--------+----------+------------+----------+---------+
+|      5 | krushna  | 2023-03-13 | manager  |   35244 |
+|      1 | pratik   | 2025-02-01 | hr       | 22154.3 |
+|      4 | mayur    | 2023-03-03 | manager  |   13244 |
+|      2 | vedant   | 2025-06-05 | manager  |   32544 |
+|      3 | yash     | 2025-06-05 | manager  |   31545 |
++--------+----------+------------+----------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee union select * from TE;
++--------+----------+------------+----------+---------+
+| emp_no | emp_name | date       | position | salary  |
++--------+----------+------------+----------+---------+
+|      1 | pratik   | 2025-02-01 | hr       | 22154.3 |
+|      2 | vedant   | 2025-02-02 | hr       | 32652.3 |
+|      3 | yash     | 2023-10-23 | manager  |  123654 |
+|      4 | mayur    | 2023-03-03 | manager  |   13244 |
+|      5 | krushna  | 2023-03-13 | manager  |   35244 |
+|      1 | pratik   | 2025-02-01 | hr       | 22154.3 |
+|      4 | mayur    | 2023-03-03 | manager  |   13244 |
+|      2 | vedant   | 2025-06-05 | manager  |   32544 |
+|      3 | yash     | 2025-06-05 | manager  |   31545 |
++--------+----------+------------+----------+---------+
+9 rows in set (0.01 sec)
+
+mysql> select * from employee union all select * from TE;
++--------+----------+------------+----------+---------+
+| emp_no | emp_name | date       | position | salary  |
++--------+----------+------------+----------+---------+
+|      1 | pratik   | 2025-02-01 | hr       | 22154.3 |
+|      2 | vedant   | 2025-02-02 | hr       | 32652.3 |
+|      3 | yash     | 2023-10-23 | manager  |  123654 |
+|      4 | mayur    | 2023-03-03 | manager  |   13244 |
+|      5 | krushna  | 2023-03-13 | manager  |   35244 |
+|      5 | krushna  | 2023-03-13 | manager  |   35244 |
+|      1 | pratik   | 2025-02-01 | hr       | 22154.3 |
+|      4 | mayur    | 2023-03-03 | manager  |   13244 |
+|      2 | vedant   | 2025-06-05 | manager  |   32544 |
+|      3 | yash     | 2025-06-05 | manager  |   31545 |
++--------+----------+------------+----------+---------+
+10 rows in set (0.00 sec)
+
+mysql> select distinct * from employee where emp_no in (select * from TE);
+ERROR 1241 (21000): Operand should contain 1 column(s)
+mysql> select distinct  from employee where emp_no in (select * from TE);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from employee where emp_no in (select * from TE)' at line 1
+mysql> select distinct emp_no from employee where emp_no in (select * from TE);
+ERROR 1241 (21000): Operand should contain 1 column(s)
+mysql> select distinct emp_no from employee where emp_no in (select emp_no from TE);
++--------+
+| emp_no |
++--------+
+|      1 |
+|      2 |
+|      3 |
+|      4 |
+|      5 |
++--------+
+5 rows in set (0.00 sec)
+
+mysql> select max(salary) from employee;
++-------------+
+| max(salary) |
++-------------+
+|      123654 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select min(salary) from TE;
++-------------+
+| min(salary) |
++-------------+
+|       13244 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(salary) from employee;
++-----------------+
+| sum(salary)     |
++-----------------+
+| 226948.68359375 |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select round(sum(salary), 2) from employee;
++-----------------------+
+| round(sum(salary), 2) |
++-----------------------+
+|             226948.68 |
++-----------------------+
+1 row in set (0.01 sec)
+
+mysql> select round(avg(salary),2) from TE;
++----------------------+
+| round(avg(salary),2) |
++----------------------+
+|             26946.26 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> select lcase(emp_name) from employee;
++-----------------+
+| lcase(emp_name) |
++-----------------+
+| pratik          |
+| vedant          |
+| yash            |
+| mayur           |
+| krushna         |
++-----------------+
+5 rows in set (0.00 sec)
+
+mysql> select ucase(emp_name) from employee;
++-----------------+
+| ucase(emp_name) |
++-----------------+
+| PRATIK          |
+| VEDANT          |
+| YASH            |
+| MAYUR           |
+| KRUSHNA         |
++-----------------+
+5 rows in set (0.00 sec)
+
+mysql> select mid(emp_name , 2 ,3) from employee;
++----------------------+
+| mid(emp_name , 2 ,3) |
++----------------------+
+| rat                  |
+| eda                  |
+| ash                  |
+| ayu                  |
+| rus                  |
++----------------------+
+5 rows in set (0.00 sec)
+
+mysql> select mid(emp_name , 2 ,3) from employee where emp_name='pratik';
++----------------------+
+| mid(emp_name , 2 ,3) |
++----------------------+
+| rat                  |
++----------------------+
+1 row in set (0.01 sec)
+
+mysql> 
+
